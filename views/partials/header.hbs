@@ -1,0 +1,27 @@
+<header>
+  <div class="container">
+    <div class="logo">
+      <h1>Community Bookshelf</h1>
+    </div>
+    
+    {{#if user}}
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/books/dashboard">Dashboard</a></li>
+        <li><a href="/books/bookshelf">My Bookshelf</a></li>
+        <li><a href="/api/search">Search Books</a></li>
+        <li><a href="/api/recommendations">Recommendations</a></li>
+        {{#if (eq user.role "admin")}}
+        <li><a href="/admin/dashboard">Admin</a></li>
+        {{/if}}
+      </ul>
+    </nav>
+    
+    <div class="user-nav">
+      <span>Welcome, {{user.username}}</span>
+      <!-- FIX: Changed from link to form with CSRF protection -->
+      <a href="/logout" class="btn btn-small">Logout</a>
+    </div>
+    {{/if}}
+  </div>
+</header>

@@ -1,0 +1,71 @@
+<div class="search">
+  <h2>Search Books</h2>
+  
+  <form action="/api/search" method="GET" class="search-form">
+    <div class="form-group search-input">
+      <input type="text" id="query" name="query" value="{{query}}" placeholder="Search by title, author, or ISBN" required>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+  
+  {{#if books}}
+  <div class="search-results">
+    <h3>Search Results for "{{query}}"</h3>
+    
+    <div class="book-list">
+      {{#each books}}
+      <div class="search-book">
+        <div class="book-cover">
+          {{#if coverUrl}}
+          <img src="{{coverUrl}}" alt="{{title}}">
+          {{else}}
+          <div class="no-cover">
+            <span>{{title}}</span>
+          </div>
+          {{/if}}
+        </div>
+        
+        <div class="book-info">
+          <h3>{{title}}</h3>
+          <p class="author">by {{author}}</p>
+          
+          {{#if year}}
+          <p class="year">{{year}}</p>
+          {{/if}}
+          
+          {{#if description}}
+          <p class="description">{{truncate description 200}}</p>
+          {{/if}}
+          
+          <form action="/api/add-to-shelf" method="POST" class="inline-form">
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <input type="hidden" name="title" value="{{title}}">
+            <input type="hidden" name="author" value="{{author}}">
+            <input type="hidden" name="year" value="{{year}}">
+            <input type="hidden" name="isbn" value="{{isbn}}">
+            <input type="hidden" name="apiId" value="{{id}}">
+            <input type="hidden" name="coverUrl" value="{{coverUrl}}">
+            
+            <div class="form-add-rating">
+              <label for="rating-{{id}}">Rating:</label>
+              <select id="rating-{{id}}" name="rating">
+                <option value="">-- Optional --</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-small">Add to Bookshelf</button>
+          </form>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{else if query}}
+  <p class="empty-message">No books found for "{{query}}". Try another search.</p>
+  {{/if}}
+</div>

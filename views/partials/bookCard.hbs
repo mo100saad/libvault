@@ -1,0 +1,49 @@
+<div class="book-card">
+  <div class="book-cover">
+    {{#if book.cover_url}}
+    <img src="{{book.cover_url}}" alt="{{book.title}}" onerror="this.onerror=null; this.src='/images/default-cover.png';">
+    {{else}}
+    <div class="no-cover">
+      <span>{{book.title}}</span>
+      <span class="author-placeholder">by {{book.author}}</span>
+    </div>
+    {{/if}}
+  </div>
+  
+  <div class="book-info">
+    <h3>{{book.title}}</h3>
+    <p class="author">by {{book.author}}</p>
+    
+    {{#if book.year}}
+    <p class="year">{{book.year}}</p>
+    {{/if}}
+    
+    {{#if book.rating}}
+    <div class="rating">
+      <span class="stars">
+        {{#if (eq book.rating 1)}}<span>★☆☆☆☆</span>{{/if}}
+        {{#if (eq book.rating 2)}}<span>★★☆☆☆</span>{{/if}}
+        {{#if (eq book.rating 3)}}<span>★★★☆☆</span>{{/if}}
+        {{#if (eq book.rating 4)}}<span>★★★★☆</span>{{/if}}
+        {{#if (eq book.rating 5)}}<span>★★★★★</span>{{/if}}
+      </span>
+    </div>
+    {{/if}}
+    
+    {{#if book.review}}
+    <div class="review">
+      <p>{{book.review}}</p>
+    </div>
+    {{/if}}
+    
+    {{#if showActions}}
+    <div class="actions">
+      <a href="/books/edit/{{book.id}}" class="btn btn-small">Edit</a>
+      <form action="/books/remove/{{book.id}}" method="POST" class="inline-form">
+        <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+        <button type="submit" class="btn btn-small btn-danger">Remove</button>
+      </form>
+    </div>
+    {{/if}}
+  </div>
+</div>

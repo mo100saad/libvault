@@ -1,0 +1,10 @@
+<div class="logout-confirmation">
+  <h2>Log Out</h2>
+  <p>Are you sure you want to log out?</p>
+  
+  <form action="/logout" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button type="submit" class="btn btn-primary">Yes, Log Out</button>
+    <a href="/books/dashboard" class="btn">Cancel</a>
+  </form>
+</div>

@@ -1,0 +1,89 @@
+<div class="admin-stats">
+  <div class="back-link">
+    <a href="/admin/dashboard">&larr; Back to Admin Dashboard</a>
+  </div>
+  
+  <h2>Community Bookshelf Statistics</h2>
+  
+  <div class="stats-grid">
+    <div class="stats-card">
+      <h3>Most Popular Books</h3>
+      {{#if popularBooks.length}}
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Readers</th>
+              <th>Avg. Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each popularBooks}}
+            <tr>
+              <td>{{title}}</td>
+              <td>{{author}}</td>
+              <td>{{reader_count}}</td>
+              <td>{{#if avg_rating}}{{truncate avg_rating 3}}{{else}}-{{/if}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p class="empty-message">No book data available yet.</p>
+      {{/if}}
+    </div>
+    
+    <div class="stats-card">
+      <h3>Top Rated Books</h3>
+      {{#if topRatedBooks.length}}
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Avg. Rating</th>
+              <th>Rated By</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each topRatedBooks}}
+            <tr>
+              <td>{{title}}</td>
+              <td>{{author}}</td>
+              <td>{{truncate avg_rating 3}}</td>
+              <td>{{rating_count}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p class="empty-message">No ratings data available yet.</p>
+      {{/if}}
+    </div>
+    
+    <div class="stats-card">
+      <h3>Most Active Users</h3>
+      {{#if activeUsers.length}}
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Books Added</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each activeUsers}}
+            <tr>
+              <td>{{username}}</td>
+              <td>{{book_count}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else}}
+        <p class="empty-message">No user activity data available yet.</p>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="bookshelf">
+  <h2>My Bookshelf</h2>
+  
+  <div class="bookshelf-actions">
+    <a href="/books/add" class="btn">Add Book Manually</a>
+    <a href="/api/search" class="btn">Search for Books</a>
+  </div>
+  
+  <div class="book-grid">
+    {{#if books.length}}
+      {{#each books}}
+        {{> bookCard book=this showActions=true}}
+      {{/each}}
+    {{else}}
+      <p class="empty-message">Your bookshelf is empty. Start adding books!</p>
+    {{/if}}
+  </div>
+</div>

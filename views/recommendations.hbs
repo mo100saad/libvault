@@ -1,0 +1,63 @@
+<div class="recommendations">
+  <h2>Book Recommendations</h2>
+  
+  <p class="info-message">Based on books in your bookshelf and your ratings</p>
+  
+  <div class="book-grid">
+    {{#if recommendations.length}}
+      {{#each recommendations}}
+      <div class="book-card recommendation">
+        <div class="book-cover">
+          {{#if coverUrl}}
+          <img src="{{coverUrl}}" alt="{{title}}">
+          {{else}}
+          <div class="no-cover">
+            <span>{{title}}</span>
+          </div>
+          {{/if}}
+        </div>
+        
+        <div class="book-info">
+          <h3>{{title}}</h3>
+          <p class="author">by {{author}}</p>
+          
+          {{#if year}}
+          <p class="year">{{year}}</p>
+          {{/if}}
+          
+          {{#if description}}
+          <p class="description">{{truncate description 150}}</p>
+          {{/if}}
+          
+          <form action="/api/add-to-shelf" method="POST" class="inline-form">
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <input type="hidden" name="title" value="{{title}}">
+            <input type="hidden" name="author" value="{{author}}">
+            <input type="hidden" name="year" value="{{year}}">
+            <input type="hidden" name="isbn" value="{{isbn}}">
+            <input type="hidden" name="apiId" value="{{id}}">
+            <input type="hidden" name="coverUrl" value="{{coverUrl}}">
+            
+            <!-- FIX: Added rating selector to match other forms -->
+            <div class="form-add-rating">
+              <label for="rating-{{id}}">Rating:</label>
+              <select id="rating-{{id}}" name="rating">
+                <option value="">-- Optional --</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-small">Add to Bookshelf</button>
+          </form>
+        </div>
+      </div>
+      {{/each}}
+    {{else}}
+      <p class="empty-message">No recommendations found. Try adding more books to your bookshelf first.</p>
+    {{/if}}
+  </div>
+</div>

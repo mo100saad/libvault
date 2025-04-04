@@ -1,0 +1,25 @@
+<div class="error-page">
+  <h2>{{#if title}}{{title}}{{else}}Error{{/if}}</h2>
+  
+  <div class="error-container">
+    <p class="error-message">{{#if message}}{{message}}{{else}}An unexpected error occurred.{{/if}}</p>
+    
+    {{#if error}}
+    <div class="error-details">
+      <pre>{{error}}</pre>
+    </div>
+    {{/if}}
+    
+    <div class="error-actions">
+      <a href="/" class="btn">Return to Home</a>
+      {{#if user}}
+        {{#if (eq user.role "admin")}}
+        <a href="/admin/dashboard" class="btn">Admin Dashboard</a>
+        {{/if}}
+        <a href="/books/dashboard" class="btn">My Dashboard</a>
+      {{else}}
+        <a href="/login" class="btn">Login</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="edit-book">
+    <h2>Edit Book</h2>
+    
+    <div class="book-info">
+      <h3>{{book.title}}</h3>
+      <p class="author">by {{book.author}}</p>
+      
+      {{#if book.year}}
+      <p class="year">{{book.year}}</p>
+      {{/if}}
+    </div>
+    
+    <form action="/books/edit/{{book.id}}" method="POST" class="book-form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" name="rating">
+          <option value="">-- Select Rating --</option>
+          <option value="1" {{#if (eq book.rating 1)}}selected{{/if}}>1 - Poor</option>
+          <option value="2" {{#if (eq book.rating 2)}}selected{{/if}}>2 - Fair</option>
+          <option value="3" {{#if (eq book.rating 3)}}selected{{/if}}>3 - Good</option>
+          <option value="4" {{#if (eq book.rating 4)}}selected{{/if}}>4 - Very Good</option>
+          <option value="5" {{#if (eq book.rating 5)}}selected{{/if}}>5 - Excellent</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="review">Review</label>
+        <textarea id="review" name="review" rows="5">{{book.review}}</textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/books/bookshelf" class="btn">Cancel</a>
+      </div>
+    </form>
+  </div>

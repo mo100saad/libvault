@@ -1,0 +1,40 @@
+<div class="admin-user-view">
+  <div class="back-link">
+    <a href="/admin/dashboard">&larr; Back to Admin Dashboard</a>
+  </div>
+  
+  <h2>User Details: {{viewUser.username}}</h2>
+  
+  <div class="user-info">
+    <p><strong>Email:</strong> {{viewUser.email}}</p>
+    <p><strong>Role:</strong> {{viewUser.role}}</p>
+    <p><strong>Joined:</strong> {{formatDate viewUser.created_at}}</p>
+  </div>
+  
+  <div class="user-stats">
+    <div class="stat-item">
+      <span class="stat-label">Books on Shelf:</span>
+      <span class="stat-value">{{stats.bookCount}}</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Average Rating:</span>
+      <span class="stat-value">{{stats.avgRating}}</span>
+    </div>
+  </div>
+  
+  <div class="bookshelf-actions">
+    <a href="/admin/user/{{viewUser.id}}/add-book" class="btn">Add Book to User's Shelf</a>
+  </div>
+  
+  <h3>User's Bookshelf</h3>
+  
+  <div class="book-grid">
+    {{#if books.length}}
+      {{#each books}}
+        {{> bookCard book=this showActions=false}}
+      {{/each}}
+    {{else}}
+      <p class="empty-message">This user hasn't added any books yet.</p>
+    {{/if}}
+  </div>
+</div>

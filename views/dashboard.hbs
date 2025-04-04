@@ -1,0 +1,60 @@
+<div class="dashboard">
+  <h2>Welcome to Your Dashboard, {{user.username}}</h2>
+  
+  <div class="dashboard-section">
+    <div class="section-header">
+      <h3>Recently Added Books</h3>
+      <a href="/books/bookshelf" class="view-all">View All</a>
+    </div>
+    
+    <div class="book-grid">
+      {{#if recentBooks.length}}
+        {{#each recentBooks}}
+          {{> bookCard book=this showActions=true}}
+        {{/each}}
+      {{else}}
+        <p class="empty-message">You haven't added any books yet.</p>
+        <a href="/api/search" class="btn">Search for Books</a>
+        <p>or</p>
+        <a href="/books/add" class="btn">Add Book Manually</a>
+      {{/if}}
+    </div>
+  </div>
+  
+  <div class="dashboard-section">
+    <div class="section-header">
+      <h3>Your Top Rated Books</h3>
+    </div>
+    
+    <div class="book-grid">
+      {{#if topRatedBooks.length}}
+        {{#each topRatedBooks}}
+          {{> bookCard book=this showActions=true}}
+        {{/each}}
+      {{else}}
+        <p class="empty-message">You haven't rated any books yet.</p>
+      {{/if}}
+    </div>
+  </div>
+  
+  <div class="dashboard-section">
+    <div class="section-header">
+      <h3>Quick Links</h3>
+    </div>
+    
+    <div class="quick-links">
+      <a href="/api/recommendations" class="quick-link">
+        <span class="icon">📚</span>
+        <span>Get Recommendations</span>
+      </a>
+      <a href="/api/search" class="quick-link">
+        <span class="icon">🔍</span>
+        <span>Search Books</span>
+      </a>
+      <a href="/books/add" class="quick-link">
+        <span class="icon">➕</span>
+        <span>Add Book Manually</span>
+      </a>
+    </div>
+  </div>
+</div>

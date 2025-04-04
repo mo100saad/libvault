@@ -1,0 +1,48 @@
+<div class="add-book">
+    <h2>Add Book Manually</h2>
+    
+    <form action="/books/add" method="POST" class="book-form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <div class="form-group">
+        <label for="title">Title*</label>
+        <input type="text" id="title" name="title" value="{{book.title}}" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="author">Author*</label>
+        <input type="text" id="author" name="author" value="{{book.author}}" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="year">Year Published</label>
+        <input type="number" id="year" name="year" value="{{book.year}}" min="1000" max="2025">
+      </div>
+      
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <input type="text" id="isbn" name="isbn" value="{{book.isbn}}">
+      </div>
+      
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" name="rating">
+          <option value="">-- Select Rating --</option>
+          <option value="1" {{#if (eq book.rating 1)}}selected{{/if}}>1 - Poor</option>
+          <option value="2" {{#if (eq book.rating 2)}}selected{{/if}}>2 - Fair</option>
+          <option value="3" {{#if (eq book.rating 3)}}selected{{/if}}>3 - Good</option>
+          <option value="4" {{#if (eq book.rating 4)}}selected{{/if}}>4 - Very Good</option>
+          <option value="5" {{#if (eq book.rating 5)}}selected{{/if}}>5 - Excellent</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="review">Review</label>
+        <textarea id="review" name="review" rows="5">{{book.review}}</textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Add Book</button>
+        <a href="/books/bookshelf" class="btn">Cancel</a>
+      </div>
+    </form>
+  </div>

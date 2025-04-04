@@ -1,0 +1,31 @@
+<div class="auth-container">
+  <h2>Create an Account</h2>
+  
+  <form action="/register" method="POST" class="auth-form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="{{username}}" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{email}}" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required>
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Register</button>
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </form>
+</div>
